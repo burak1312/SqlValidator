@@ -1,7 +1,6 @@
 package com.sqlvalidator.views;
 
 import com.sqlvalidator.controller.MainController;
-import com.sqlvalidator.exception.InvalidSqlStatementException;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
@@ -63,12 +62,8 @@ public class MainView extends VerticalLayout {
 
 		messageInput.addSubmitListener(listener -> {
 			final String sqlStatement = listener.getValue();
-			try {
-				mainController.analyseStatement(sqlStatement);
-				Notification.show("Das SQL-Statement ist syntaktisch korrekt");
-			} catch (InvalidSqlStatementException invalidsqlstatementexception) {
-				Notification.show(invalidsqlstatementexception.getMessage());
-			}
+			mainController.analyseStatement(sqlStatement);
+
 		});
 
 		return messageInput;
