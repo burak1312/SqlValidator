@@ -21,6 +21,8 @@ public class MainController {
 			} catch (SQLException e) {
 
 				final String fehlerMessage = e.getMessage();
+				
+				System.out.println(fehlerMessage);
 
 				if (fehlerMessage.contains("doesn't exist")) {
 					// alles ok

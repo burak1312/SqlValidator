@@ -57,6 +57,14 @@
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
+<!-- https://mvnrepository.com/artifact/com.github.jsqlparser/jsqlparser -->
+<dependency>
+    <groupId>com.github.jsqlparser</groupId>
+    <artifactId>jsqlparser</artifactId>
+    <version>4.6</version>
+</dependency>
+
+
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
 			<groupId>mysql</groupId>
