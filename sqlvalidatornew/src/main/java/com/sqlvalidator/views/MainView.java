@@ -12,6 +12,8 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 
+import net.sf.jsqlparser.JSQLParserException;
+
 /**
  * A sample Vaadin view class.
  * <p>
@@ -62,7 +64,11 @@ public class MainView extends VerticalLayout {
 
 		messageInput.addSubmitListener(listener -> {
 			final String sqlStatement = listener.getValue();
-			mainController.analyseStatement(sqlStatement);
+			try {
+				mainController.analyseStatement(sqlStatement);
+			} catch (JSQLParserException e) {
+				e.printStackTrace();
+			}
 
 		});
 

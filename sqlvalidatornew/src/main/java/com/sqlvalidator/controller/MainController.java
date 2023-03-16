@@ -8,9 +8,11 @@ import java.util.Objects;
 import com.sqlvalidator.database.DatabaseConnection;
 import com.vaadin.flow.component.notification.Notification;
 
+import net.sf.jsqlparser.JSQLParserException;
+
 public class MainController {
 
-	public void analyseStatement(String sqlStatement) {
+	public void analyseStatement(String sqlStatement) throws JSQLParserException {
 		Objects.requireNonNull(sqlStatement);
 
 		final Connection connection = DatabaseConnection.getConnection();
@@ -18,14 +20,13 @@ public class MainController {
 			try {
 				final PreparedStatement preparedStatement = connection.prepareStatement(sqlStatement);
 				preparedStatement.execute();
+				Notification.show("Das SQL Statement ist gültig!");
 			} catch (SQLException e) {
 
 				final String fehlerMessage = e.getMessage();
-				
-				System.out.println(fehlerMessage);
 
 				if (fehlerMessage.contains("doesn't exist")) {
-					// alles ok
+					Notification.show("SQL-Statement ist gültig");
 					return;
 				} else {
 					final String fehlerZeile = fehlerMessage.substring(fehlerMessage.length() - 1);
@@ -44,7 +45,5 @@ public class MainController {
 			}
 
 		}
-
 	}
-
 }
